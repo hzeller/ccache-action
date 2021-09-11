@@ -59239,8 +59239,9 @@ var cache = __nccwpck_require__(7799);
 async function install() {
     if (external_process_namespaceObject.platform === "darwin") {
         await exec.exec("brew install ccache");
-    }
-    else {
+    } else if (process.platform === "win32") {
+        await exec.exec("pacman --noconfirm -S --needed ccache");
+    } else {
         await exec.exec("sudo apt-get install -y ccache");
     }
 }

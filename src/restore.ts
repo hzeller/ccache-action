@@ -9,6 +9,8 @@ import * as cache from "@actions/cache";
 async function install() {
   if (process.platform === "darwin") {
     await exec.exec("brew install ccache");
+  } else if (process.platform === "win32") {
+     await exec.exec("pacman --noconfirm -S --needed ccache");
   } else {
     await exec.exec("sudo apt-get install -y ccache");
   }
